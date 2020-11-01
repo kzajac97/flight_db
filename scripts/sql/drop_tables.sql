@@ -1,0 +1,4 @@
+DROP TABLE Airline;
+DROP TABLE Airport;
+DROP TABLE Flight;
+DROP TABLE Route;
