@@ -14,8 +14,8 @@ CREATE TABLE Airport (
 
 CREATE TABLE Route (
     [RouteId] [int] PRIMARY KEY NOT NULL UNIQUE,
-    [DepartureAirportId] [smallint] NOT NULL UNIQUE,
-    [DepartureAirportId] [smallint] NOT NULL UNIQUE,
+    [DepartureAirportId] [smallint] NOT NULL,
+    [ArrivalAirportId] [smallint] NOT NULL,
     [ArrivalDateTime] [date],
     [DepartureDateTime] [date],
 
@@ -29,7 +29,7 @@ CREATE TABLE Route (
 
 CREATE TABLE Flight (
     [FlightId] [int] PRIMARY KEY NOT NULL UNIQUE,
-    [AirlineId] [smallint] NOT NULL UNIQUE,
+    [AirlineId] [smallint] NOT NULL,
     [RouteId] [int] NOT NULL UNIQUE,
     [FlightCode] [char(12)] NOT NULL UNIQUE,
     [Duration] [time],
