@@ -23,3 +23,29 @@ To verify data content is correct
 ```sqlite
 select * from Airline
 ```
+
+## Yugabyte DB
+
+To start an instance of Distributed SQL using **Yugabyte** and **Docker** follow steps:
+
+1. Download docker image of **YugabyteDB** from [docker image registry](https://hub.docker.com/r/yugabytedb/yugabyte)
+```bash
+docker pull yugabytedb/yugabyte
+```
+
+2. Start up persistent container using volume mapping.
+```bash
+docker run -d --name yugabyte  -p 7000:7000 -p 9000:9000 -p 5433:5433 -p 9042:9042\
+-v ~/yb_data:/home/yugabyte/var\
+ yugabytedb/yugabyte:latest bin/yugabyted start\
+ --daemon=false
+```
+
+3. Verify **docker** container is running:
+```bash
+docker ps
+```
+
+4. Visit Yugabyte [admin panel](http://localhost:7000)
+
+All steps are available at [YugabyteDB docs](https://docs.yugabyte.com/)
