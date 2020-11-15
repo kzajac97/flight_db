@@ -1,44 +1,44 @@
-CREATE TABLE Airline (
-    [AirlineId] [smallint] PRIMARY KEY NOT NULL UNIQUE,
-    [Name] [varchar] NOT NULL UNIQUE,
-    [AirlineCode] [char(3)] NOT NULL UNIQUE
+CREATE TABLE airline (
+    airline_id smallint PRIMARY KEY NOT NULL UNIQUE,
+    name varchar NOT NULL UNIQUE,
+    airline_code char(3) NOT NULL UNIQUE
 );
 
-CREATE TABLE Airport (
-    [AirportId] [smallint] PRIMARY KEY NOT NULL UNIQUE,
-    [AirportCode] [char(3)] NOT NULL UNIQUE,
-    [FullName] [varchar] NOT NULL,
-    [OriginCountry] [varchar],
-    [OriginCity] [varchar]
+CREATE TABLE airport (
+    airport_id smallint PRIMARY KEY NOT NULL UNIQUE,
+    airport_code char(3) NOT NULL UNIQUE,
+    full_name varchar NOT NULL,
+    origin_country varchar,
+    origin_city varchar
 );
 
-CREATE TABLE Route (
-    [RouteId] [int] PRIMARY KEY NOT NULL UNIQUE,
-    [DepartureAirportId] [smallint] NOT NULL,
-    [ArrivalAirportId] [smallint] NOT NULL,
-    [ArrivalDateTime] [date],
-    [DepartureDateTime] [date],
+CREATE TABLE route (
+    route_id int PRIMARY KEY NOT NULL UNIQUE,
+    departure_airport_id smallint NOT NULL,
+    arrival_airport_id smallint NOT NULL,
+    arrival_datetime date,
+    departure_datetime date,
 
-    CONSTRAINT DepartureAirportFk
-        FOREIGN KEY (DepartureAirportId) REFERENCES Airport(AirportId),
+    CONSTRAINT departure_airport_fk
+        FOREIGN KEY (departure_airport_id) REFERENCES airport(airport_id),
 
-    CONSTRAINT ArrivalAirportFk
-        FOREIGN KEY (ArrivalAirportId) REFERENCES Airport(AirportId)
+    CONSTRAINT arrival_airport_fk
+        FOREIGN KEY (arrival_airport_id) REFERENCES airport(airport_id)
 );
 
 
-CREATE TABLE Flight (
-    [FlightId] [int] PRIMARY KEY NOT NULL UNIQUE,
-    [AirlineId] [smallint] NOT NULL,
-    [RouteId] [int] NOT NULL UNIQUE,
-    [FlightCode] [char(12)] NOT NULL UNIQUE,
-    [Duration] [time],
-    [Passengers] [smallint],
-    [Intercontinental] [bit],
+CREATE TABLE flight (
+    flight_id int PRIMARY KEY NOT NULL UNIQUE,
+    airline_id smallint NOT NULL,
+    route_id int NOT NULL UNIQUE,
+    flight_code char(12) NOT NULL UNIQUE,
+    duration time,
+    passengers smallint,
+    intercontinental bit,
 
-    CONSTRAINT AirlineFk
-        FOREIGN KEY (AirlineId) REFERENCES Airline(AirlineId),
+    CONSTRAINT airline_fk
+        FOREIGN KEY (airline_id) REFERENCES airline(airline_id),
 
-    CONSTRAINT RouteFk
-        FOREIGN KEY (RouteId) REFERENCES Route(RouteId)
+    CONSTRAINT route_fk
+        FOREIGN KEY (route_id) REFERENCES route(route_id)
 );
