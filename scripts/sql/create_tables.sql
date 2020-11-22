@@ -9,7 +9,8 @@ CREATE TABLE airport (
     airport_code char(3) NOT NULL UNIQUE,
     full_name varchar NOT NULL,
     origin_country varchar,
-    origin_city varchar
+    origin_city varchar,
+    geographic_location varchar
 );
 
 CREATE TABLE route (
