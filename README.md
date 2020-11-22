@@ -89,3 +89,48 @@ SELECT * FROM airport WHERE origin_country='Poland';
 ```
 
 All steps are available at [YugabyteDB docs](https://docs.yugabyte.com/)
+
+## Register geolocations
+
+[Docs](https://docs.yugabyte.com/latest/admin/yb-admin/)
+[Tables](https://docs.yugabyte.com/latest/explore/multi-region-deployments/row-level-geo-partitioning/)
+
+0. Optional set, clean-up previous docker containers and volumes
+
+```bash
+docker-compose down
+docker rm -f $(docker ps -a -q)
+docker volume rm $(docker volume ls -q)
+docker-compose up -d
+```
+
+1. Start up all required containers using
+
+```bash
+docker-compose up -d
+```
+
+2. Enter master container and create two clusters
+
+```bash
+docker exec -it yb-master-n1 bash
+```
+
+3. Create clusters
+
+```bash
+./bin/yb-ctl create --data_dir /home/yugabyte/yb-datacenter-europe --ip_start 1
+./bin/yb-ctl create --data_dir /home/yugabyte/yb-datacenter-america --ip_start 2
+```
+
+4. Enter **ysqlsh** prompt in create cluster
+
+```bash
+.\bin\ysqlsh -h 127.0.0.1
+```
+
+5. To connect to **ysqlsh** on tserver from master container use:
+
+```bash
+./bin/ysqlsh -h yb-tserver-n1-europe
+``` 
