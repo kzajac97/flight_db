@@ -8,30 +8,30 @@ volumes:
 services:
   yb-master:
       image: yugabytedb/yugabyte:latest
-      container_name: yb-master-n1
+      container_name: yb-master
       volumes:
       - yb-master-data-1:/mnt/master
       command: [ "/home/yugabyte/bin/yb-master",
                 "--fs_data_dirs=/mnt/master",
-                "--master_addresses=yb-master-n1:7100",
-                "--rpc_bind_addresses=yb-master-n1:7100",
+                "--master_addresses=yb-master:7100",
+                "--rpc_bind_addresses=yb-master:7100",
                 "--replication_factor=1"]
       ports:
       - "7000:7000"
       environment:
         SERVICE_7000_NAME: yb-master
 
-  yb-tserver-1:
+  yb-tserver-europe:
       image: yugabytedb/yugabyte:latest
-      container_name: yb-tserver-n1
+      container_name: yb-tserver-europe
       volumes:
       - yb-tserver-data-1:/mnt/tserver
       - .:/home/flight_db
       command: [ "/home/yugabyte/bin/yb-tserver",
                 "--fs_data_dirs=/mnt/tserver",
                 "--start_pgsql_proxy",
-                "--rpc_bind_addresses=yb-tserver-n1:9100",
-                "--tserver_master_addrs=yb-master-n1:7100"]
+                "--rpc_bind_addresses=yb-tserver-europe:9100",
+                "--tserver_master_addrs=yb-master:7100"]
       ports:
       - "9042:9042"
       - "5433:5433"
@@ -40,21 +40,21 @@ services:
         SERVICE_5433_NAME: ysql
         SERVICE_9042_NAME: ycql
         SERVICE_6379_NAME: yedis
-        SERVICE_9000_NAME: yb-tserver
+        SERVICE_9000_NAME: yb-tserver-europe
       depends_on:
       - yb-master
 
-  yb-tserver-2:
+  yb-tserver-america:
       image: yugabytedb/yugabyte:latest
-      container_name: yb-tserver-n2
+      container_name: yb-tserver-america
       volumes:
       - yb-tserver-data-2:/mnt/tserver
       - .:/home/flight_db
       command: [ "/home/yugabyte/bin/yb-tserver",
                 "--fs_data_dirs=/mnt/tserver",
                 "--start_pgsql_proxy",
-                "--rpc_bind_addresses=yb-tserver-n2:9101",
-                "--tserver_master_addrs=yb-master-n1:7100"]
+                "--rpc_bind_addresses=yb-tserver-america:9101",
+                "--tserver_master_addrs=yb-master:7100"]
       ports:
       - "9052:9052"
       - "5453:5453"
@@ -63,6 +63,6 @@ services:
         SERVICE_5453_NAME: ysql
         SERVICE_9052_NAME: ycql
         SERVICE_6389_NAME: yedis
-        SERVICE_9020_NAME: yb-tserver
+        SERVICE_9020_NAME: yb-tserver-america
       depends_on:
       - yb-master
