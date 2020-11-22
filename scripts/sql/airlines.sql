@@ -1,0 +1,11 @@
+INSERT INTO airline (airline_id, name, airline_code) VALUES (1, 'Ryanair', 'RYR');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (2, 'Lufthansa Group', 'DLH');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (3, 'International Airlines Group', 'AAN');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (4, 'Air France-KLM', 'SEU');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (5, 'Easyjet', 'EZY');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (6, 'Wizz Air', 'WZZ');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (7, 'American Airlines', 'AAL');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (8, 'Delta Air Lines', 'DAL');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (9, 'Southwest Airlines', 'SWA');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (10, 'Air Canada', 'ROU');
+INSERT INTO airline (airline_id, name, airline_code) VALUES (11, 'LOT Polish Airlines', 'LOT');
