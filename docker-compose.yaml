@@ -11,6 +11,7 @@ services:
       container_name: yb-master-n1
       volumes:
       - yb-master-data-1:/mnt/master
+      - .:/home/flight_db
       command: [ "/home/yugabyte/bin/yb-master",
                 "--fs_data_dirs=/mnt/master",
                 "--master_addresses=yb-master-n1:7100",
@@ -25,13 +26,14 @@ services:
       image: yugabytedb/yugabyte:latest
       container_name: yb-tserver-n1-europe
       volumes:
-      - yb-tserver-data-1:/mnt/tserver
+      - yb-tserver-data-1:/mnt/tserver-1
       - .:/home/flight_db
       command: [ "/home/yugabyte/bin/yb-tserver",
-                "--fs_data_dirs=/mnt/tserver",
+                "--fs_data_dirs=/mnt/tserver-1",
                 "--start_pgsql_proxy",
                 "--rpc_bind_addresses=yb-tserver-n1-europe:9100",
-                "--tserver_master_addrs=yb-master-n1:7100"]
+                "--tserver_master_addrs=yb-master-n1:7100",
+                "--placement_region=europe"]
       ports:
       - "9042:9042"
       - "5433:5433"
@@ -48,21 +50,26 @@ services:
       image: yugabytedb/yugabyte:latest
       container_name: yb-tserver-n2-america
       volumes:
-      - yb-tserver-data-2:/mnt/tserver
+      - yb-tserver-data-2:/mnt/tserver-2
       - .:/home/flight_db
       command: [ "/home/yugabyte/bin/yb-tserver",
-                "--fs_data_dirs=/mnt/tserver",
+                "--fs_data_dirs=/mnt/tserver-2",
                 "--start_pgsql_proxy",
                 "--rpc_bind_addresses=yb-tserver-n2-america:9101",
-                "--tserver_master_addrs=yb-master-n1:7100"]
+                "--tserver_master_addrs=yb-master-n1:7100",
+                "--placement_region=america",
+                "--webserver_port=9001",
+                "--pgsql_proxy_bind_address=0.0.0.0:5434",
+                "--cql_proxy_bind_address=0.0.0.0:9043",
+                "--redis_proxy_bind_address=0.0.0.0:6380"]
       ports:
-      - "9052:9052"
-      - "5453:5453"
-      - "9020:9020"
+      - "9043:9043"
+      - "5434:5434"
+      - "9001:9001"
       environment:
-        SERVICE_5453_NAME: ysql
-        SERVICE_9052_NAME: ycql
-        SERVICE_6389_NAME: yedis
-        SERVICE_9020_NAME: yb-tserver
+        SERVICE_5434_NAME: ysql
+        SERVICE_9043_NAME: ycql
+        SERVICE_6380_NAME: yedis
+        SERVICE_9001_NAME: yb-tserver
       depends_on:
       - yb-master
