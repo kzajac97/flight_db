@@ -120,7 +120,7 @@ docker exec -it yb-master-n1 bash
 ./bin/ysqlsh -h yb-tserver-n1-europe
 ```
 
-Or to america, it uses different port than default:
+3.Or to america, it uses different port than default:
 
 ```bash
 ./bin/ysqlsh -h yb-tserver-n2-america -p 5434
@@ -128,3 +128,9 @@ Or to america, it uses different port than default:
 
 To set-up replication see: [YugabyteDB Docs](https://docs.yugabyte.com/latest/explore/multi-region-deployments/asynchronous-replication-ysql/)
 
+4.Add tables and then set their location
+
+```bash
+yb-admin --master_addresses yb-master-n1 modify_table_placement_info ysql.flight_db airports_europe local.europe.europe-1a 1
+yb-admin --master_addresses yb-master-n1 modify_table_placement_info ysql.flight_db airports_america local.america.america-1a 1
+```
