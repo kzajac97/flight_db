@@ -16,7 +16,12 @@ services:
                 "--fs_data_dirs=/mnt/master",
                 "--master_addresses=yb-master-n1:7100",
                 "--rpc_bind_addresses=yb-master-n1:7100",
-                "--replication_factor=1"]
+                "--replication_factor=1",
+                "--yb_num_shards_per_tserver=1",
+                "--ysql_num_shards_per_tserver=1",
+                "--placement_cloud=local",
+                "--placement_region=europe",
+                "--placement_zone=europe-2a"]
       ports:
       - "7000:7000"
       environment:
@@ -33,7 +38,11 @@ services:
                 "--start_pgsql_proxy",
                 "--rpc_bind_addresses=yb-tserver-n1-europe:9100",
                 "--tserver_master_addrs=yb-master-n1:7100",
-                "--placement_region=europe"]
+                "--yb_num_shards_per_tserver=1",
+                "--ysql_num_shards_per_tserver=1",
+                "--placement_cloud=local",
+                "--placement_region=europe",
+                "--placement_zone=europe-1a"]
       ports:
       - "9042:9042"
       - "5433:5433"
@@ -57,7 +66,11 @@ services:
                 "--start_pgsql_proxy",
                 "--rpc_bind_addresses=yb-tserver-n2-america:9101",
                 "--tserver_master_addrs=yb-master-n1:7100",
+                "--yb_num_shards_per_tserver=1",
+                "--ysql_num_shards_per_tserver=1",
+                "--placement_cloud=local",
                 "--placement_region=america",
+                "--placement_zone=america-1a",
                 "--webserver_port=9001",
                 "--pgsql_proxy_bind_address=0.0.0.0:5434",
                 "--cql_proxy_bind_address=0.0.0.0:9043",

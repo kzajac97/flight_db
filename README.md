@@ -134,3 +134,9 @@ To set-up replication see: [YugabyteDB Docs](https://docs.yugabyte.com/latest/ex
 yb-admin --master_addresses yb-master-n1 modify_table_placement_info ysql.flight_db airports_europe local.europe.europe-1a 1
 yb-admin --master_addresses yb-master-n1 modify_table_placement_info ysql.flight_db airports_america local.america.america-1a 1
 ```
+
+5.To verify tablets are stored correctly use:
+
+```bash
+./bin/yb-admin --master_addresses yb-master-n1 list_tablets ysql.flight_db airports_america
+```
