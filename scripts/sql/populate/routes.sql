@@ -1,4 +1,3 @@
-INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (0, 33, 55, '2022-10-03 03:40:00', '2022-10-03 09:10:00');
 INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (1, 79, 39, '2020-01-01 10:00:00', '2020-01-01 12:20:00');
 INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (2, 69, 46, '2020-01-01 13:20:00', '2020-01-01 20:00:00');
 INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (3, 42, 21, '2020-01-01 17:40:00', '2020-01-01 23:20:00');
@@ -9998,3 +9997,5 @@ INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure
 INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (9997, 13, 65, '2022-10-02 18:50:00', '2022-10-03 04:30:00');
 INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (9998, 77, 8, '2022-10-02 19:10:00', '2022-10-02 23:50:00');
 INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (9999, 75, 74, '2022-10-02 23:30:00', '2022-10-03 03:40:00');
+INSERT INTO route (route_id, departure_airport_id, arrival_airport_id, departure_datetime, arrival_datetime) VALUES (10000, 33, 55, '2022-10-03 03:40:00', '2022-10-03 09:10:00');
+

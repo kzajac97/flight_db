@@ -1,130 +1,57 @@
-# flight_db
+# FLIGHT DB
 
-Distributed database for airport management system.
+Distributed data base system for managing flight connections between Europe and America. <br>
+System is built using distributed **YugabyteDB** engine and **docker**
 
-## sqllite DB
+## Set up
 
-To create running instance of Flight Database using **sqlite** follow steps:
+To set-up database follow steps:
 
-1. Install sqlite and it to **PATH** variable <br>
-2. Create empty database with: ```sqlite3 flight.db```
-3. Enter sqlite prompt and execute SQL scripts:
-```sqlite
-.read create_tables.sql
-.read populate_db.sql
-```
+1.Pull from repo or download released archive, store it in target location
 
-To verify tables are correct:
-```sqlite
-.tables
-```
+2.Start-up docker containers
 
-To verify data content is correct
-```sqlite
-select * from Airline
-```
-
-## Yugabyte DB
-
-To start an instance of Distributed SQL using **Yugabyte** and **Docker** follow steps:
-
-1.Download docker image of **YugabyteDB** from [docker image registry](https://hub.docker.com/r/yugabytedb/yugabyte)
+If necessary pull required docker images
 
 ```bash
 docker pull yugabytedb/yugabyte
 ```
 
-2.Start up persistent container using volume mapping.
+```bash
+docker-compose up -d
+```
+
+If restarting clean-up old volumes and running containers
 
 ```bash
-docker run -d --name flight_db  -p 7000:7000 -p 9000:9000 -p 5433:5433 -p 9042:9042\
--v ~/yb_data:/home/yugabyte/var\
--v ${PWD}:/home/flight_db\
-yugabytedb/yugabyte:latest bin/yugabyted start\
- --daemon=false
-```
-
-3.Verify **docker** container is running and project directory is correctly mapped:
-
-```bash
-docker ps
-docker exec -it flight_db bash
-```
-
-Inside docker container
-
-```bash
-cd /home/flight_db
-ls -laF
-```
-
-5.Visit Yugabyte [admin panel](http://localhost:7000)
-
-6.Populate database with scripts
-Open ysqlsh command line tool for **YugabyteDB**
-
-```bash
-docker exec -it flight_db /home/yugabyte/bin/ysqlsh --echo-queries
-```
-
-Inside container, connect to **flight_db** and verify database is empty:
-
-```postgresql
-\c flight_db
-\dt
-```
-
-Create DB schema and upload data
-
-```postgresql
-\i flight_db/scripts/sql/create_tables.sql
-\i flight_db/scripts/sql/populate_db.sql
-```
-
-Verify Database contents:
-
-```postgresql
-SELECT * FROM airline;
-SELECT * FROM airport WHERE origin_country='Poland';
-```
-
-All steps are available at [YugabyteDB docs](https://docs.yugabyte.com/)
-
-## Create Data Replication
-
-[Docs](https://docs.yugabyte.com/latest/admin/yb-admin/)
-[Tables](https://docs.yugabyte.com/latest/explore/multi-region-deployments/row-level-geo-partitioning/)
-
-0.Optional set, clean-up previous docker containers and volumes
-
-```bash
-docker-compose down
+docker-compose down --remove-orphans
 docker rm -f $(docker ps -a -q)
 docker volume rm $(docker volume ls -q)
 docker-compose up -d
 ```
 
-1.Start up all required containers using
-
-```bash
-docker-compose up -d
-```
-
-2.Enter master container and create two clusters
+2.Enter master container and start database
 
 ```bash
 docker exec -it yb-master-n1 bash
 ```
 
+In container move to */home* directory and run script:
+
+```bash
+cd /home
+./flight_db/scripts/shell/set_up.sh
+```
+
+Wait for script to complete and verify database content and integrity:
+
 ```bash
 ./bin/ysqlsh -h yb-tserver-n1-europe
 ```
 
-Or to america, it uses different port than default:
+In **ysqlsh**
 
-```bash
-./bin/ysqlsh -h yb-tserver-n2-america -p 5434
+```postgre
+\c flight_db
+\dt
 ```
-
-To set-up replication see: [YugabyteDB Docs](https://docs.yugabyte.com/latest/explore/multi-region-deployments/asynchronous-replication-ysql/)
-
