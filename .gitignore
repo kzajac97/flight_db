@@ -1,3 +1,4 @@
-idea/*
+.idea/*
 db/*
 !db/README.md
+*-checkpoint.ipynb
