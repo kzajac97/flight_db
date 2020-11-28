@@ -27,7 +27,7 @@ CREATE TABLE route (
 
     CONSTRAINT arrival_airport_fk
         FOREIGN KEY (arrival_airport_id) REFERENCES airport(airport_id)
-);
+) SPLIT INTO 16 TABLETS;;
 
 
 CREATE TABLE flight (
@@ -45,6 +45,7 @@ CREATE TABLE flight (
     CONSTRAINT route_fk
         FOREIGN KEY (route_id) REFERENCES route(route_id)
 ) PARTITION BY LIST(flight_type);
+
 
 CREATE TABLE flight_europe
     PARTITION OF flight(
@@ -68,3 +69,15 @@ CREATE TABLE flight_america
         passengers,
         flight_type
 ) FOR VALUES IN ('North America');
+
+
+CREATE TABLE flight_default
+    PARTITION OF flight(
+        flight_id,
+        airline_id,
+        route_id,
+        flight_code,
+        duration,
+        passengers,
+        flight_type
+) DEFAULT;
