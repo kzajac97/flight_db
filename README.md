@@ -43,6 +43,12 @@ cd /home
 ./flight_db/scripts/shell/set_up.sh
 ```
 
+In case of unexpected error with indentation and end line characters run:
+
+```bash
+sed -i -e 's/\r$//' ./flight_db/scripts/shell/set_up.sh
+```
+
 Wait for script to complete and verify database content and integrity:
 
 ```bash
