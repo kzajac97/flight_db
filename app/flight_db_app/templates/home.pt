@@ -4,11 +4,11 @@
             <h1 style="margin-left:80px; margin-bottom:20px" >Air Connection</h1>
             <h1 style="margin-left:80px; margin-bottom:20px" >Management System</h1>
              <div class="row">
-                 <div> <button class="button_style" id="register_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Flight</button> </div>
+                 <div> <button class="button_style" id="register_flight" onclick="location.href='https://google.com';" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Flight</button> </div>
                  <div> <button class="button_style" id="report_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Report Flight</button></div>
                  <div> <button class="button_style" id="flights_stats" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Flights Stats</button></div>
-                 <div> <button class="button_style" id="report_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airport</button></div>
-                 <div> <button class="button_style" id="report_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airline</button></div>
+                 <div> <button class="button_style" id="register_airport" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airport</button></div>
+                 <div> <button class="button_style" id="register_airline" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airline</button></div>
             </div>
         </div>
     </div>
