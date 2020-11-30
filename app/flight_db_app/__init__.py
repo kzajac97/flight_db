@@ -11,6 +11,7 @@ def main(global_config, **settings):
     config.add_route("flight_stats", "/flight_stats")
     config.add_route("register_airport", "/register_airport")
     config.add_route("register_airline", "/register_airline")
+    config.add_route("register_airline_input", "/register_airline_input")
     # Path to directory with all static views
     config.add_static_view(name="static", path="flight_db_app:static")
     config.scan(".views")
