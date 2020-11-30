@@ -2,3 +2,4 @@
 db/*
 !db/README.md
 *-checkpoint.ipynb
+app/flight_db_app.egg-info/*
