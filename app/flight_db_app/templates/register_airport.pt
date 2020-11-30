@@ -1,7 +1,7 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
     <head>
-        <title> Flight Airport</title>
+        <title>Register Airport</title>
     </head>
     <body>
 

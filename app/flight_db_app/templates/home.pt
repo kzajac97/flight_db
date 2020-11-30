@@ -4,11 +4,45 @@
             <h1 style="margin-left:80px; margin-bottom:20px" >Air Connection</h1>
             <h1 style="margin-left:80px; margin-bottom:20px" >Management System</h1>
              <div class="row">
-                 <div> <button class="button_style" id="register_flight" onclick="location.href='https://google.com';" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Flight</button> </div>
-                 <div> <button class="button_style" id="report_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Report Flight</button></div>
-                 <div> <button class="button_style" id="flights_stats" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Flights Stats</button></div>
-                 <div> <button class="button_style" id="register_airport" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airport</button></div>
-                 <div> <button class="button_style" id="register_airline" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airline</button></div>
+                 <a href="${request.application_url}/register_flight">
+                     <button class="button_style" id="register_flight_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Register Flight
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/report_flight">
+                     <button class="button_style" id="report_flight_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Report Flight
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/flight_stats">
+                     <button class="button_style" id="flight_stats_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Flight Stats
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/register_airport">
+                     <button class="button_style" id="register_airport_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Register Airport
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/register_airline">
+                     <button class="button_style" id="register_airline_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Register Airline
+                     </button>
+                 </a>
             </div>
         </div>
     </div>

@@ -1,10 +1,10 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
     <head>
-        <title> Flight Flight </title>
+        <title>Register Flight</title>
     </head>
     <body>
-
+        <h1>Register Flight</h1>
     </body>
     </div>
 </div>
