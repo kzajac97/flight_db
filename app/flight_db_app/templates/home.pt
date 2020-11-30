@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title> Air Connection Management System </title>
-</head>
-<body>
-<h1></h1>
-<p></p>
-</body>
-</html>
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+        <div class="content">
+            <h1 style="margin-left:80px; margin-bottom:20px" >Air Connection</h1>
+            <h1 style="margin-left:80px; margin-bottom:20px" >Management System</h1>
+             <div class="row">
+                 <div> <button class="button_style" id="register_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Flight</button> </div>
+                 <div> <button class="button_style" id="report_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Report Flight</button></div>
+                 <div> <button class="button_style" id="flights_stats" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Flights Stats</button></div>
+                 <div> <button class="button_style" id="report_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airport</button></div>
+                 <div> <button class="button_style" id="report_flight" type="button" style="color:black; margin-left:160px; margin-bottom:10px; height:40px; width:400px">Register Airline</button></div>
+            </div>
+        </div>
+    </div>
+</div>
