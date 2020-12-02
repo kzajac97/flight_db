@@ -18,17 +18,45 @@
                      </label>
                      <label style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right"> Origin Country:
                         <select name="origin_country_list" id="origin_country_list" style="color:black; height:20px; width:200px">
-                            <option value="canada">Canada</option>
-                            <option value="usa">USA</option>
-                            <option value="mexico">Mexico</option>
+                            <option value="Canada">Canada</option>
+                            <option value="United States">United States</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Spain">Spain</option>
+                            <option value="France">France</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Malta">Malta</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Slovenia">Slovenia</option>
+                            <option value="Croatia">Croatia</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="North Macedonia">North Macedonia</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Netherlands">Netherlands</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Finland">Finland</option>
+                            <option value="Latvia">Latvia</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Iceland">Iceland</option>
                         </select>
                      </label>
                      <label style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right"> Origin City:
                          <input type="text" id="airport_origin_city_form" name="airport_origin_city_form" style="color:black; height:20px; width:400px">
                      </label>
+                     <label style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right"> Airport Code:
+                         <input type="text" id="airport_code_form" name="airport_code_form" style="color:black; height:20px; width:400px">
+                     </label>
                      <input type="submit" value="Register" style="color:black; margin-left:200px; margin-top:16px; height:32px; width:200px"/>
                  </form>
-                 <p style="font-size:16px; margin-left:280px; margin-top:32px">${message}</p>
+                 <p style="font-size:16px; margin-left:280px; margin-top:80px">${message}</p>
             </div>
         </div>
         <div>

@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy import exc
 
+from ..data import airports
+
 
 class TransactionManager:
     """Class responsible for all logic behind data base transactions"""
@@ -21,17 +23,30 @@ class TransactionManager:
 
         # insert strings
         self.insert_airline = "INSERT INTO airline (name, airline_code) VALUES ('{name}', '{code}');"
+        self.insert_airport = """INSERT INTO airport
+            (airport_code, full_name, origin_country, origin_city, geographic_location)
+            VALUES ('{code}', '{name}', '{country}', '{city}', '{location}');"""
 
     def register_airline(self, name: str, code: str) -> str:
-        """
-
-        :param name:
-        :param code:
-        :return:
-        """
+        """Register airline into the database system"""
         with self.db.begin() as connection:
             try:
                 connection.execute(text(self.insert_airline.format(name=name, code=code)))
                 return self.success_message
             except exc.IntegrityError:
                 return f"Airline name and code must be unique!\n{name} or {code} are already registered in database!"
+
+    def register_airport(self, code: str, name: str, country: str, city: str) -> str:
+        """Register airport into the database system"""
+        location = airports.get_geo_location(country)
+        if len(code) != 3:
+            return "Code must be 3 letters long!"
+
+        with self.db.begin() as connection:
+            try:
+                connection.execute(text(self.insert_airport.format(
+                    name=name, code=code.upper(), country=country, city=city, location=location,
+                )))
+                return self.success_message
+            except exc.IntegrityError:
+                return f"Airport code {code.upper()} is already registered in FlightDB!"
