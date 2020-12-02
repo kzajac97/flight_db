@@ -2,7 +2,6 @@ from configparser import ConfigParser
 
 from pyramid.view import view_config, view_defaults
 
-from flight_db_app.src.transactions import airline
 from flight_db_app.src.transactions import TransactionManager
 
 
