@@ -13,9 +13,9 @@
                   </p>
                  <form action="/register_airline_input" method="post" style="margin-left:80px; margin-bottom:10px;
                              height:100px; width:800px; margin-top:60px">
-                     <label> Airline Name: <input type="text" id="airline_name_form" name="airline_name_form" style="color:black"> </label>
-                     <label> Airline Code: <input type="text" id="airline_code_form" name="airline_code_form" style="color:black"> </label>
-                     <label style="margin-top:20px"> Register <input type="submit" value="" ></label>
+                     <label> Airline Name: <input type="text" id="airline_name_form" name="airline_name_form" style="color:black; height:20px; width:400px"> </label>
+                     <label> Airline Code: <input type="text" id="airline_code_form" name="airline_code_form" style="color:black; height:20px; width:400px"> </label>
+                     <input type="submit" value="Register" style="color:black; margin-left:200px; margin-top:16px; height:32px; width:200px"/>
                  </form>
             </div>
         </div>
