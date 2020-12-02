@@ -27,14 +27,20 @@ class Views:
 
     @view_config(route_name="register_airport", renderer="../templates/register_airport.pt")
     def register_airport(self):
-        return {}
+        return {"message": ""}
 
     @view_config(route_name="register_airline", renderer="../templates/register_airline.pt")
     def register_airline(self):
-        return {}
+        return {"message": ""}
 
     @view_config(route_name="register_airline_input", renderer="../templates/register_airline.pt")
     def register_airline_input(self):
         print(dict(self.request.POST))
 
-        return {}
+        return {"message": "Successfully Registered Airline"}
+
+    @view_config(route_name="register_airport_input", renderer="../templates/register_airport.pt")
+    def register_airport_inout(self):
+        print(dict(self.request.POST))
+
+        return {"message": "Successfully Registered Airport"}

@@ -8,3 +8,4 @@ def includeme(config):
     config.add_route("register_airport", "/register_airport")
     config.add_route("register_airline", "/register_airline")
     config.add_route("register_airline_input", "/register_airline_input")
+    config.add_route("register_airport_input", "/register_airport_input")
