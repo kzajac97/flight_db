@@ -2,7 +2,8 @@ from configparser import ConfigParser
 
 from pyramid.view import view_config, view_defaults
 
-from flight_db_app.src.transactions import TransactionManager
+from flight_db_app.src.db import TransactionManager
+from flight_db_app.src.data.airlines import convert_to_form_values
 
 
 @view_defaults(renderer="../templates/home.pt")
@@ -19,7 +20,8 @@ class Views:
 
     @view_config(route_name="register_flight", renderer="../templates/register_flight.pt")
     def register_flight(self):
-        return {}
+        airlines = self.tm.query_airlines()
+        return {"message": "", "options": convert_to_form_values(airlines)}
 
     @view_config(route_name="report_flight", renderer="../templates/report_flight.pt")
     def report_flight(self):
@@ -36,6 +38,15 @@ class Views:
     @view_config(route_name="register_airline", renderer="../templates/register_airline.pt")
     def register_airline(self):
         return {"message": ""}
+
+    @view_config(route_name="register_flight_input", renderer="../templates/register_flight.pt")
+    def register_flight_input(self):
+        airlines = self.tm.query_airlines()
+
+        form = dict(self.request.POST)
+        print(form)
+
+        return {"message": "", "options": convert_to_form_values(airlines)}
 
     @view_config(route_name="register_airline_input", renderer="../templates/register_airline.pt")
     def register_airline_input(self):

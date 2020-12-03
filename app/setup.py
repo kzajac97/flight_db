@@ -3,10 +3,13 @@ from setuptools import setup
 # List of dependencies installed via `pip install -e .`
 # by virtue of the Setuptools `install_requires` value below.
 requires = [
+    'deform',
     'pyramid',
     'pyramid_chameleon',
     'pyramid_jinja2',
-    'waitress', 'sqlalchemy'
+    'waitress',
+    'sqlalchemy',
+    'colander',
 ]
 
 # List of dependencies installed via `pip install -e ".[dev]"`
