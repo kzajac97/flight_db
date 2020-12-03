@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy import exc
 
 from ..data import airports
+from . import insert, select
 
 
 class TransactionManager:
@@ -21,20 +22,11 @@ class TransactionManager:
             db_name=db_config["db_name"],
         ))
 
-        # insert strings
-        self._insert_airline = "INSERT INTO airline (name, airline_code) VALUES ('{name}', '{code}');"
-        self._insert_airport = """INSERT INTO airport
-            (airport_code, full_name, origin_country, origin_city, geographic_location)
-            VALUES ('{code}', '{name}', '{country}', '{city}', '{location}');"""
-
-        # query strings
-        self._select_airlines = "SELECT airline_id, name FROM airline;"
-
     def register_airline(self, name: str, code: str) -> str:
         """Register airline into the database system"""
         with self.db.begin() as connection:
             try:
-                connection.execute(text(self._insert_airline.format(name=name, code=code)))
+                connection.execute(text(insert.AIRLINE.format(name=name, code=code)))
                 return self.success_message
             except exc.IntegrityError:
                 return f"Airline name and code must be unique!\n{name} or {code} are already registered in database!"
@@ -47,7 +39,7 @@ class TransactionManager:
 
         with self.db.begin() as connection:
             try:
-                connection.execute(text(self._insert_airport.format(
+                connection.execute(text(insert.AIRPORT.format(
                     name=name, code=code.upper(), country=country, city=city, location=location,
                 )))
                 return self.success_message
@@ -57,6 +49,13 @@ class TransactionManager:
     def query_airlines(self):
         """Query airlines in Database"""
         with self.db.begin() as connection:
-            result = connection.execute(text(self._select_airlines))
+            result = connection.execute(text(select.FLIGHT_ID_AND_NAME))
+
+        return result
+
+    def query_airports(self):
+        """Query airlines in Database"""
+        with self.db.begin() as connection:
+            result = connection.execute(text(select.AIRPORT_ID_AND_NAME))
 
         return result
