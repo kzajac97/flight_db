@@ -20,8 +20,9 @@ class Views:
 
     @view_config(route_name="register_flight", renderer="../templates/register_flight.pt")
     def register_flight(self):
-        airlines = self.tm.query_airlines()
-        airports = self.tm.query_airports()
+        airlines = self.tm.query_all_airlines()
+        airports = self.tm.query_all_airports()
+
         return {
             "message": "",
             "airline_options": convert_to_form_values(airlines),
@@ -46,12 +47,21 @@ class Views:
 
     @view_config(route_name="register_flight_input", renderer="../templates/register_flight.pt")
     def register_flight_input(self):
-        airlines = self.tm.query_airlines()
+        airlines = self.tm.query_all_airlines()
+        airports = self.tm.query_all_airports()
 
         form = dict(self.request.POST)
-        print(form)
+        message = self.tm.register_flight(
+            airline=form["airline_id_select"],
+            departure=form["departure_airport_id_select"],
+            arrival=form["arrival_airport_id_select"],
+        )
 
-        return {"message": "", "options": convert_to_form_values(airlines)}
+        return {
+            "message": message,
+            "airline_options": convert_to_form_values(airlines),
+            "airport_options": convert_to_form_values(airports),
+        }
 
     @view_config(route_name="register_airline_input", renderer="../templates/register_airline.pt")
     def register_airline_input(self):

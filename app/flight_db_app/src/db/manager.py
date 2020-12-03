@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy import exc
 
-from ..data import airports
+from ..data import codes, geo, tables
 from . import insert, select
 
 
@@ -22,6 +22,52 @@ class TransactionManager:
             db_name=db_config["db_name"],
         ))
 
+        self.current_flight_id = self.query_flight_id() + 1
+        self.current_route_id = self.query_route_id() + 1
+
+    def register_flight(self, airline: int, departure: int, arrival: int) -> str:
+        """
+        Registers flight into database system
+        Airline and Airport args must be database IDs!
+        """
+        airline = tables.airline_to_dict(self.query_airline_by_id(airline))
+        departure = tables.airport_to_dict(self.query_airport_by_id(departure))
+        arrival = tables.airport_to_dict(self.query_airport_by_id(arrival))
+
+        if departure["city"] == arrival["city"]:
+            return "Error! Arrival and departure locations must be different"
+
+        print("Registering flight: ")
+        print("Airline ID: ", airline["id"])
+        print("Flight_id: ", self.current_flight_id)
+        print("Route_id: ", self.current_route_id)
+        print(geo.is_intercontinental(departure["geo"], arrival["geo"]))
+        print("Code", codes.create_flight_code(airline["code"], departure["code"], arrival["code"], self.query_flight_count(departure["id"], arrival["id"])))
+        flight_code = codes.create_flight_code(airline["code"], departure["code"], arrival["code"], self.query_flight_count(departure["id"], arrival["id"]))
+
+        with self.db.begin() as connection:
+            try:
+                connection.execute(text(insert.ROUTE.format(
+                    route_id=self.current_route_id,
+                    departure_id=departure["id"],
+                    arrival_id=arrival["id"]
+                )))
+
+                connection.execute(text(insert.FLIGHT.format(
+                    flight_id=self.current_flight_id,
+                    airline_id=airline["id"],
+                    route_id=self.current_route_id,
+                    flight_code=flight_code,
+                    flight_type=geo.is_intercontinental(departure["geo"], arrival["geo"])
+                )))
+
+                self.current_route_id += 1
+                self.current_flight_id += 1
+
+                return self.success_message
+            except exc.IntegrityError:
+                return "Unexpected Server Error!"
+
     def register_airline(self, name: str, code: str) -> str:
         """Register airline into the database system"""
         with self.db.begin() as connection:
@@ -33,7 +79,8 @@ class TransactionManager:
 
     def register_airport(self, code: str, name: str, country: str, city: str) -> str:
         """Register airport into the database system"""
-        location = airports.get_geo_location(country)
+        location = geo.get_geo_location(country)
+
         if len(code) != 3:
             return "Code must be 3 letters long!"
 
@@ -46,16 +93,51 @@ class TransactionManager:
             except exc.IntegrityError:
                 return f"Airport code {code.upper()} is already registered in FlightDB!"
 
-    def query_airlines(self):
-        """Query airlines in Database"""
+    def query_airline_by_id(self, identifier: int):
+        """Query for specific airline"""
         with self.db.begin() as connection:
-            result = connection.execute(text(select.FLIGHT_ID_AND_NAME))
+            result = connection.execute(text(select.AIRLINE_BY_ID.format(identifier)))
 
         return result
 
-    def query_airports(self):
+    def query_airport_by_id(self, identifier: int):
+        """Query for specific airline"""
+        with self.db.begin() as connection:
+            result = connection.execute(text(select.AIRPORT_BY_ID.format(identifier)))
+
+        return result
+
+    def query_all_airlines(self):
+        """Query airlines in Database"""
+        with self.db.begin() as connection:
+            result = connection.execute(text(select.AIRLINE_ID_AND_NAME))
+
+        return result
+
+    def query_all_airports(self):
         """Query airlines in Database"""
         with self.db.begin() as connection:
             result = connection.execute(text(select.AIRPORT_ID_AND_NAME))
 
         return result
+
+    def query_route_id(self):
+        """Gets current route ID value"""
+        with self.db.begin() as connection:
+            result = connection.execute(text(select.MAX_ROUTE_ID))
+
+        return int(tuple(result)[0][0])
+
+    def query_flight_id(self):
+        """Gets current flight ID value"""
+        with self.db.begin() as connection:
+            result = connection.execute(text(select.MAX_FLIGHT_ID))
+
+        return int(tuple(result)[0][0])
+
+    def query_flight_count(self, departure, arrival) -> int:
+        """Count number of flights between two airports"""
+        with self.db.begin() as connection:
+            result = connection.execute(text(select.FLIGHT_COUNT.format(departure_id=departure, arrival_id=arrival)))
+
+        return int(tuple(result)[0][0])

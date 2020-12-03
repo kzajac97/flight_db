@@ -1,1 +1,1 @@
-from . import airports
+from . import geo

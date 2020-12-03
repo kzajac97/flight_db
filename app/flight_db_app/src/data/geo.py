@@ -1,6 +1,17 @@
 from typing import Optional
 
 
+def is_intercontinental(departure: str, arrival: str) -> str:
+    """Return code for inter continental or internal flights"""
+    if departure == "Europe" and arrival == "Europe":
+        return "Internal Europe"
+
+    if departure == "Internal North America" and arrival == "Internal North America":
+        return "Internal North America"
+
+    return "Intercontinental"
+
+
 def get_geo_location(country: str) -> Optional[str]:
     """Converts country to location"""
     country_to_geo_location_mapping = {
