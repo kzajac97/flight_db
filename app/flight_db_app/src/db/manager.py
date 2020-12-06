@@ -44,7 +44,7 @@ class TransactionManager:
 
         if departure["city"] == arrival["city"]:
             logger.error("Error! Arrival and departure locations are the same")
-            return "Error! Arrival and departure locations must be different"
+            return "Error! Arrival and departure locations must be different", ""
 
         with self.db.begin() as connection:
             try:
@@ -69,7 +69,7 @@ class TransactionManager:
                 return self.success_message, f"Flight Code is: {flight_code}"
             except exc.IntegrityError:
                 logger.error("Unexpected Server Error!")
-                return "Unexpected Server Error!"
+                return "Unexpected Server Error!", ""
 
     def report_flight(self, flight_code: str, passengers: str, departure_dt: str, arrival_dt: str) -> str:
         """Report flight into the database system"""

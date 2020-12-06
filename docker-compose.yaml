@@ -120,11 +120,11 @@ services:
       - yb-master
 
   yb-access-app:
-      image: python_image
-      build:
-        context: .
-        dockerfile: Dockerfile
-      command: ["python", "/home/flight_db/sleep.py"]
+      image: python:3
+      command: python -m pip install --upgrade pip
+      command: bash -c "pip install -e home/flight_db/app/."
+      command: bash -c "pip install -e home/flight_db/app/.\"[.dev]\""
+      command: bash -c "pserve home/flight_db/app/config.ini --reload"
       container_name: yb-server-app
       volumes:
         - .:/home/flight_db
