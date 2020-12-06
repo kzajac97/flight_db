@@ -1,5 +1,6 @@
 import logging
 
+import pandas as pd
 from sqlalchemy import create_engine, text
 from sqlalchemy import exc
 
@@ -203,3 +204,16 @@ class TransactionManager:
             result = connection.execute(text(select.FLIGHT_COUNT.format(departure_id=departure, arrival_id=arrival)))
 
         return int(tuple(result)[0][0])
+
+    def query_all_airport_stats(self, airport_id):
+        with self.db.begin() as connection:
+            arrivals = connection.execute(text(select.ALL_ARRIVALS.format(arrival_id=airport_id)))
+            departures = connection.execute(text(select.ALL_DEPARTURES.format(departure_id=airport_id)))
+
+        df = pd.DataFrame.from_records(tuple(arrivals))
+        print(df)
+
+        df = pd.DataFrame.from_records(tuple(departures))
+        print(df)
+
+        return "Airport Name"

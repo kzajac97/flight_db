@@ -1,0 +1,14 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+    <head>
+         <link href="${request.static_url('flight_db_app:static/theme.css')}" rel="stylesheet">
+        <title>Register Flight</title>
+    </head>
+    <body>
+            <p style="font-size:16px; margin-left:280px; margin-top:40px">Stats for ${airport}</p>
+        <div style="width: 50%;margin-left: 25%;margin-top: 58px;">
+            <script type = "text/javascript" src = "flight_db_app:plots/plotly.js"></script>
+        </div>
+    </body>
+    </div>
+</div>

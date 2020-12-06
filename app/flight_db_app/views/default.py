@@ -1,6 +1,8 @@
 import logging
+import plotly
 from configparser import ConfigParser
 
+import pandas as pd
 from pyramid.view import view_config, view_defaults
 
 from flight_db_app.src.db import TransactionManager
@@ -47,7 +49,34 @@ class Views:
     @view_config(route_name="flight_stats", renderer="../templates/flight_stats.pt")
     def flight_stats(self):
         logger.info("Flight Stats")
-        return {}
+        airports = self.tm.query_all_airports()
+
+        return {
+            "airport_options": convert_to_form_values(airports),
+        }
+
+    @view_config(route_name="show_flight_input", renderer="../templates/stats.pt")
+    def show_flight_stats(self):
+        logger.info("Form submitted")
+        form = dict(self.request.POST)
+
+        stats = self.tm.query_all_airport_stats(form["airport_id_select"])
+
+        sample_data = pd.DataFrame.from_records([["A", 10], ["B", 9], ["C", 8], ["D", 7], ["E", 6], ["F", 5], ["G", 4], ["H", 3], ["I", 1], ["K", 1]], columns=["name", "flights"])
+
+        #with open(r"flight_db_app/templates/stats.pt", "r") as file:
+        #    template = file.read()
+
+        #fill_in = template.replace("#{top_arrivals}", sample_data.to_html(index=False, justify="center", classes="style-table"))
+
+        #with open(r"flight_db_app/templates/show_stats.pt", "w") as file:
+        #    file.write(fill_in)
+
+        logger.info("Operation Completed")
+        return {
+            "airport": stats,
+            "top_arrivals": sample_data,
+        }
 
     @view_config(route_name="register_airport", renderer="../templates/register_airport.pt")
     def register_airport(self):

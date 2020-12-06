@@ -10,6 +10,8 @@ requires = [
     'waitress',
     'sqlalchemy',
     'colander',
+    'pandas',
+    'plotly',
 ]
 
 # List of dependencies installed via `pip install -e ".[dev]"`

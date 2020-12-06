@@ -12,3 +12,6 @@ SELECT COUNT(*)
 FROM route
 WHERE departure_airport_id={departure_id} AND arrival_airport_id={arrival_id};
 """
+ALL_DEPARTURES = "SELECT * FROM route WHERE arrival_airport_id={departure_id};"
+ALL_ARRIVALS = "SELECT * FROM route WHERE arrival_airport_id={arrival_id};"
+SELECT_CORRESPONDING_FLIGHT = "SELECT * FROM flight WHERE route_id in {route_ids_as_tuple};"
