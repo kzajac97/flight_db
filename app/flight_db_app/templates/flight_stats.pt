@@ -1,0 +1,31 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+    <head>
+        <title>Flight Stats</title>
+    </head>
+    <body>
+        <div class="content">
+            <h2 style="margin-left:140px; margin-bottom:20px" >Flight Stats</h2>
+             <div class="row">
+                  <p style="font-size: 16px; margin-left:160px">
+                      Show flight statistics from given airport.
+                  </p>
+                 <form action="/show_flight_input" method="post" style="margin-left:80px; margin-bottom:10px;
+                             height:100px; width:800px; margin-top:20px">
+                     <label style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right"> Airport:
+                        <select name="airport_id_select" id="airport_id_select" style="color:black; height:20px; width:200px">
+                            <ul tal:repeat="option airport_options">
+                                <option value="${option.id}"> ${option.name} </option>
+                            </ul>
+                        </select>
+                     </label>
+                     <input type="submit" value="Show Stats" style="color:black; margin-left:200px; margin-top:16px; height:32px; width:200px"/>
+                 </form>
+            </div>
+        </div>
+        <div>
+            <a href="${request.application_url}/"> Return </a>
+        </div>
+    </body>
+    </div>
+</div>

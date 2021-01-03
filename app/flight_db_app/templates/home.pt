@@ -1,0 +1,49 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+        <div class="content">
+            <h1 style="margin-left:80px; margin-bottom:20px" >Air Connection</h1>
+            <h1 style="margin-left:80px; margin-bottom:20px" >Management System</h1>
+             <div class="row">
+                 <a href="${request.application_url}/register_flight">
+                     <button class="button_style" id="register_flight_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Register Flight
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/report_flight">
+                     <button class="button_style" id="report_flight_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Report Flight
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/flight_stats">
+                     <button class="button_style" id="flight_stats_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Flight Stats
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/register_airport">
+                     <button class="button_style" id="register_airport_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Register Airport
+                     </button>
+                 </a>
+
+                 <a href="${request.application_url}/register_airline">
+                     <button class="button_style" id="register_airline_button"
+                             type="button" style="color:black;
+                             margin-left:160px; margin-bottom:10px;
+                             height:40px; width:400px">Register Airline
+                     </button>
+                 </a>
+            </div>
+        </div>
+    </div>
+</div>

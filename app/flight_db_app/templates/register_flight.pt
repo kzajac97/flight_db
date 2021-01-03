@@ -1,0 +1,53 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+    <head>
+        <title>Register Flight</title>
+    </head>
+    <body>
+        <div class="content">
+            <h2 style="margin-left:140px; margin-bottom:20px" >Register Flight</h2>
+             <div class="row">
+                  <p style="font-size: 16px; margin-left:160px">
+                      Register a flight into <strong>FlightDB</strong> Management System. <br>
+                      Flight is scheduled and after completing it must be reported into the system.
+                  </p>
+                 <form action="/register_flight_input" method="post" style="margin-left:80px; margin-bottom:10px;
+                             height:100px; width:800px; margin-top:80px">
+
+                     <label style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right"> Airline:
+                        <select name="airline_id_select" id="airline_id_select" style="color:black; height:20px; width:200px">
+                            <ul tal:repeat="option airline_options">
+                                <option value="${option.id}"> ${option.name} </option>
+                            </ul>
+                        </select>
+                     </label>
+
+                     <label style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right"> Departure:
+                        <select name="departure_airport_id_select" id="departure_airport_id_select" style="color:black; height:20px; width:200px">
+                            <ul tal:repeat="option airport_options">
+                                <option value="${option.id}"> ${option.name} </option>
+                            </ul>
+                        </select>
+                     </label>
+
+                     <label style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right"> Arrival:
+                        <select name="arrival_airport_id_select" id="arrival_airport_id_select" style="color:black; height:20px; width:200px">
+                            <ul tal:repeat="option airport_options">
+                                <option value="${option.id}"> ${option.name} </option>
+                            </ul>
+                        </select>
+                     </label>
+
+                     <input type="submit" value="Register" style="color:black; margin-left:200px; margin-top:16px; height:32px; width:200px"/>
+                 </form>
+            <p style="font-size:16px; margin-left:280px; margin-top:40px">${message}</p>
+            <p style="font-size:16px; margin-left:280px; margin-top:5px">${flight_code}</p>
+
+            </div>
+        </div>
+        <div>
+            <a href="${request.application_url}/"> Return </a>
+        </div>
+    </body>
+    </div>
+</div>

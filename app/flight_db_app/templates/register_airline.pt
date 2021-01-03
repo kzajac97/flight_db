@@ -1,0 +1,29 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+    <head>
+        <title>Register Airline</title>
+    </head>
+    <body>
+        <div class="content">
+            <h2 style="margin-left:140px; margin-bottom:20px" >Register Airline</h2>
+             <div class="row">
+                  <p style="font-size: 16px; margin-left:160px">
+                      Register new airline into <strong>FlightDB</strong> Management System. <br>
+                      It will become available for registering flights between all registered airports. <br>
+                      Airline Code must be unique in order to allow flight code generation!
+                  </p>
+                 <form action="/register_airline_input" method="post" style="margin-left:80px; margin-bottom:10px;
+                             height:100px; width:800px; margin-top:80px">
+                     <label> Airline Name: <input type="text" id="airline_name_form" name="airline_name_form" style="color:black; height:20px; width:400px"> </label>
+                     <label> Airline Code: <input type="text" id="airline_code_form" name="airline_code_form" style="color:black; height:20px; width:400px"> </label>
+                     <input type="submit" value="Register" style="color:black; margin-left:200px; margin-top:16px; height:32px; width:200px"/>
+                 </form>
+                 <p style="font-size:16px; margin-left:280px; margin-top:32px">${message}</p>
+            </div>
+        </div>
+        <div>
+            <a href="${request.application_url}/"> Return </a>
+        </div>
+    </body>
+    </div>
+</div>

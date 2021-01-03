@@ -1,0 +1,36 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+    <head>
+        <title>Report Flight</title>
+    </head>
+    <body>
+       <div class="content">
+            <h2 style="margin-left:140px; margin-bottom:20px" >Report Flight</h2>
+             <div class="row">
+                  <p style="font-size: 16px; margin-left:160px">
+                      Register a flight into <strong>FlightDB</strong> Management System. <br>
+                      Flight is scheduled and after completing it must be reported into the system.
+                  </p>
+                 <form action="/report_flight_input" method="post" style="margin-left:80px; margin-bottom:10px;
+                             height:100px; width:800px; margin-top:80px">
+                     <label> Flight Code: <input type="text" id="flight_code_form" name="flight_code_form" style="color:black; height:20px; width:400px"> </label>
+                     <label> Number of passengers: <input type="text" id="passengers_form" name="passengers_form" style="color:black; height:20px; width:400px"> </label>
+                     <label> Departure date-time: <input type="datetime-local" placeholder="YYYY-MM-DD HH:MM" value=""
+                                                         min="1997-01-01" max="2030-12-31"
+                                                         id="departure_dt_form" name="departure_dt_form"
+                                                         style="color:black; height:20px; width:400px">
+                     </label>
+                     <label> Arrival date-time: <input type="datetime-local" placeholder="YYYY-MM-DD HH:MM" value=""
+                                                         min="2020-01-01" max="2030-12-31"
+                                                         id="arrival_dt_form" name="arrival_dt_form"
+                                                         style="color:black; height:20px; width:400px">
+                     </label>
+
+                     <input type="submit" value="Report" style="color:black; margin-left:200px; margin-top:0px; height:32px; width:200px"/>
+                 </form>
+            <p style="font-size:16px; margin-left:280px; margin-top:50px">${message}</p>
+            </div>
+        </div>
+    </body>
+    </div>
+</div>
